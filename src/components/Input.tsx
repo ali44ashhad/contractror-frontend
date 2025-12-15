@@ -15,7 +15,7 @@ const Input = memo(
       const inputClasses = `mt-1 block w-full rounded-md border ${
         error
           ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-          : 'border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6]'
+          : 'border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB]'
       } p-2 ${className}`;
 
       return (

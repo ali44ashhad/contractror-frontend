@@ -92,5 +92,3 @@ The app uses httpOnly cookies for authentication. The backend automatically sets
 Primary color: `#00BFB6` (teal)
 
 All styling uses TailwindCSS utility classes matching the contractor theme.
-
-# contractror-frontend

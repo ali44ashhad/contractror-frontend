@@ -60,7 +60,7 @@ function Table<T>({
     return (
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
         <div className="p-8 text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#00BFB6]"></div>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#2563EB]"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>

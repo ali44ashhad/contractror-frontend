@@ -149,7 +149,7 @@ const ExtensionRequestForm = memo<ExtensionRequestFormProps>(
             className={`mt-1 block w-full rounded-md border ${
               errors.reason
                 ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                : 'border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6]'
+                : 'border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB]'
             } p-2`}
           />
           {errors.reason && (
@@ -163,7 +163,7 @@ const ExtensionRequestForm = memo<ExtensionRequestFormProps>(
           <button
             type="submit"
             disabled={isLoading}
-            className="flex-1 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="flex-1 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Submitting...' : 'Submit Request'}
           </button>

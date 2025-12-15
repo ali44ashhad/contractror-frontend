@@ -92,7 +92,7 @@ const MemberDashboard: React.FC = () => {
             <div className="flex items-center gap-4">
               {/* Hamburger (mobile) */}
               <button
-                className="md:hidden p-2 rounded-lg hover:bg-[#00BFB6]/10 transition duration-300"
+                className="md:hidden p-2 rounded-lg hover:bg-[#2563EB]/10 transition duration-300"
                 onClick={toggleSidebar}
                 aria-label="Toggle sidebar"
               >
@@ -113,7 +113,7 @@ const MemberDashboard: React.FC = () => {
 
               {/* Logo */}
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00BFB6] to-[#00a8a0] flex items-center justify-center text-white font-bold shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] flex items-center justify-center text-white font-bold shadow-lg">
                   MP
                 </div>
                 <div className="hidden sm:block font-bold text-gray-800 text-lg">
@@ -122,33 +122,17 @@ const MemberDashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Search / notifications / profile */}
+            {/* Profile */}
             <div className="flex-1 px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-end gap-4">
+                {/* Desktop: UserDropdown */}
                 <div className="hidden sm:flex items-center gap-3">
-                  <button
-                    className="p-2 rounded-lg hover:bg-[#00BFB6]/10 transition duration-300"
-                    title="Notifications"
-                    aria-label="Notifications"
-                  >
-                    <svg
-                      className="w-6 h-6 text-gray-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                      />
-                    </svg>
-                  </button>
+                  <UserDropdown />
+                </div>
 
-                  <div className="pl-3 border-l border-gray-200">
-                    <UserDropdown />
-                  </div>
+                {/* Mobile: UserDropdown only */}
+                <div className="sm:hidden">
+                  <UserDropdown />
                 </div>
               </div>
             </div>
@@ -177,13 +161,13 @@ const MemberDashboard: React.FC = () => {
                   whileHover={{ x: 4 }}
                   className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 transition duration-300 ${
                     activeMenu === menu.key
-                      ? 'bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold shadow-lg'
-                      : 'text-gray-700 hover:bg-[#00BFB6]/10 hover:text-[#00BFB6]'
+                      ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold shadow-lg'
+                      : 'text-gray-700 hover:bg-[#2563EB]/10 hover:text-[#2563EB]'
                   }`}
                 >
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      activeMenu === menu.key ? 'bg-white' : 'bg-[#00BFB6]'
+                      activeMenu === menu.key ? 'bg-white' : 'bg-[#2563EB]'
                     }`}
                   />
                   <span>{menu.label}</span>
@@ -195,7 +179,7 @@ const MemberDashboard: React.FC = () => {
               <motion.button
                 onClick={logout}
                 whileHover={{ scale: 1.05 }}
-                className="w-full flex items-center justify-center p-3 rounded-lg bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white shadow-lg hover:shadow-xl transition duration-300"
+                className="w-full flex items-center justify-center p-3 rounded-lg bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition duration-300"
               >
                 <LogOut size={20} className="mr-2" />
                 <span className="text-sm font-medium">Logout</span>

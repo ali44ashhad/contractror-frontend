@@ -66,7 +66,7 @@ const Modal = memo<ModalProps>(({ isOpen, onClose, title, children, size = 'md' 
           aria-labelledby={title ? 'modal-title' : undefined}
         >
           {/* Backdrop */}
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" aria-hidden="true" />
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-0" aria-hidden="true" />
 
           {/* Modal Content */}
           <motion.div
@@ -74,7 +74,7 @@ const Modal = memo<ModalProps>(({ isOpen, onClose, title, children, size = 'md' 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
-            className={`relative z-10 w-full ${sizeClasses[size]} bg-white rounded-xl shadow-2xl border border-gray-100`}
+            className={`relative z-20 w-full ${sizeClasses[size]} bg-white rounded-xl shadow-2xl border border-gray-100`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}

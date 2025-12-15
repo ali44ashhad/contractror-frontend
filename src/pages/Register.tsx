@@ -133,7 +133,7 @@ const Register: React.FC = () => {
 
   const getInputFieldClasses = useCallback(
     (fieldName: keyof ValidationErrors): string => {
-      return `mt-1 block w-full rounded-md border p-2 focus:ring-[#00BFB6] focus:border-[#00BFB6] ${
+      return `mt-1 block w-full rounded-md border p-2 focus:ring-[#2563EB] focus:border-[#2563EB] ${
         validationErrors[fieldName]
           ? 'border-red-500'
           : 'border-gray-300'
@@ -216,7 +216,7 @@ const Register: React.FC = () => {
                 value={form.password}
                 onChange={handleChange}
                 type={showPassword ? 'text' : 'password'}
-                className={`mt-1 block w-full rounded-md border p-2 pr-10 focus:ring-[#00BFB6] focus:border-[#00BFB6] ${
+                className={`mt-1 block w-full rounded-md border p-2 pr-10 focus:ring-[#2563EB] focus:border-[#2563EB] ${
                   validationErrors.password
                     ? 'border-red-500'
                     : 'border-gray-300'
@@ -226,7 +226,7 @@ const Register: React.FC = () => {
               <button
                 type="button"
                 onClick={togglePassword}
-                className="absolute right-3 top-[35px] text-gray-500 hover:text-[#00BFB6]"
+                className="absolute right-3 top-[35px] text-gray-500 hover:text-[#2563EB]"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -247,7 +247,7 @@ const Register: React.FC = () => {
                 name="role"
                 value={form.role}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 py-2.5 bg-white focus:ring-[#00BFB6] focus:border-[#00BFB6]"
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 py-2.5 bg-white focus:ring-[#2563EB] focus:border-[#2563EB]"
               >
                 <option value={UserRole.DEVELOPER}>{formatRole(UserRole.DEVELOPER)}</option>
                 <option value={UserRole.ADMIN}>{formatRole(UserRole.ADMIN)}</option>
@@ -286,7 +286,7 @@ const Register: React.FC = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full rounded-full px-4 py-3 bg-[#00BFB6] text-white font-bold mt-6 hover:bg-[#00a8a0] transition duration-150 disabled:opacity-60"
+              className="w-full rounded-full px-4 py-3 bg-[#2563EB] text-white font-bold mt-6 hover:bg-[#1D4ED8] transition duration-150 disabled:opacity-60"
               disabled={isLoading}
             >
               {isLoading ? 'Creating...' : 'Register'}
@@ -307,7 +307,7 @@ const Register: React.FC = () => {
             onClick={handleSuccessClose}
           />
           <div className="relative z-10 max-w-sm w-full bg-white rounded-lg p-6 shadow-2xl text-center">
-            <h3 className="text-lg font-semibold mb-2 text-green-600">
+            <h3 className="text-lg font-semibold mb-2 text-blue-600">
               Registration Successful
             </h3>
             <p className="text-sm text-gray-600 mb-4">
@@ -316,7 +316,7 @@ const Register: React.FC = () => {
             <div className="flex items-center justify-center space-x-3">
               <button
                 onClick={handleSuccessClose}
-                className="px-4 py-2 rounded-full bg-[#00BFB6] text-white font-medium hover:bg-[#00a8a0] transition"
+                className="px-4 py-2 rounded-full bg-[#2563EB] text-white font-medium hover:bg-[#1D4ED8] transition"
               >
                 Go to Login
               </button>

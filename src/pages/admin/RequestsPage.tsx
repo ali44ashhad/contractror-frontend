@@ -18,6 +18,7 @@ import Modal from '../../components/Modal';
 import RequestActionForm from '../../components/RequestActionForm';
 import Select from '../../components/Select';
 import Input from '../../components/Input';
+import { getRequestStatusColor, getRequestTypeColor } from '../../utils/badgeColors';
 
 /**
  * RequestsPage component
@@ -190,32 +191,6 @@ const RequestsPage: React.FC = () => {
     setActionModalType('reject');
   }, []);
 
-  // Get status badge color
-  const getStatusColor = useCallback((status: RequestStatus): string => {
-    switch (status) {
-      case RequestStatus.PENDING:
-        return 'bg-yellow-100 text-yellow-800';
-      case RequestStatus.APPROVED:
-        return 'bg-green-100 text-green-800';
-      case RequestStatus.REJECTED:
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  }, []);
-
-  // Get type badge color
-  const getTypeColor = useCallback((type: RequestType): string => {
-    switch (type) {
-      case RequestType.COMPLETION:
-        return 'bg-blue-100 text-blue-800';
-      case RequestType.EXTENSION:
-        return 'bg-purple-100 text-purple-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  }, []);
-
   // Table columns
   const columns = [
     {
@@ -239,7 +214,7 @@ const RequestsPage: React.FC = () => {
       header: 'Type',
       render: (request: ProjectRequest) => (
         <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getTypeColor(
+          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getRequestTypeColor(
             request.type
           )}`}
         >
@@ -252,7 +227,7 @@ const RequestsPage: React.FC = () => {
       header: 'Status',
       render: (request: ProjectRequest) => (
         <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
+          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getRequestStatusColor(
             request.status
           )}`}
         >
@@ -409,7 +384,7 @@ const RequestsPage: React.FC = () => {
             <>
               <button
                 onClick={() => handleApproveClick(request)}
-                className="p-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition duration-300"
+                className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition duration-300"
                 aria-label="Approve request"
                 title="Approve request"
               >

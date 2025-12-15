@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import UserDropdown from './UserDropdown';
 
@@ -14,13 +14,12 @@ interface NavbarProps {
 const Navbar = memo<NavbarProps>(({ className = '' }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { isAuthenticated, user, logout } = useAuth();
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about-us' },
-    { name: 'Contact', href: '/contact-us' },
-    { name: 'Help', href: '/help' },
+    { name: 'About Us', href: '#about-us' },
   ];
 
   const handleLogout = useCallback(async () => {
@@ -28,12 +27,49 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
     setIsMenuOpen(false);
   }, [logout]);
 
+  const handleAboutUsClick = useCallback(() => {
+    setIsMenuOpen(false);
+    if (location.pathname === '/') {
+      // If already on home page, scroll to about section
+      const aboutSection = document.getElementById('about-us');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // If on another page, navigate to home and then scroll
+      navigate('/');
+      // Use a longer timeout to ensure the page has rendered
+      setTimeout(() => {
+        const aboutSection = document.getElementById('about-us');
+        if (aboutSection) {
+          aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
+  }, [location.pathname, navigate]);
+
+  const handleNavClick = useCallback(
+    (item: { name: string; href: string }) => {
+      if (item.name === 'About Us') {
+        handleAboutUsClick();
+      } else {
+        setIsMenuOpen(false);
+        navigate(item.href);
+      }
+    },
+    [navigate, handleAboutUsClick]
+  );
+
   const goAndClose = useCallback(
     (href: string) => {
       setIsMenuOpen(false);
-      navigate(href);
+      if (href === '#about-us') {
+        handleAboutUsClick();
+      } else {
+        navigate(href);
+      }
     },
-    [navigate]
+    [navigate, handleAboutUsClick]
   );
 
   return (
@@ -58,8 +94,8 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
               {navItems.map((item) => (
                 <li key={item.name}>
                   <button
-                    onClick={() => navigate(item.href)}
-                    className="text-sm font-medium text-slate-700 hover:text-[#00BFB6] transition"
+                    onClick={() => handleNavClick(item)}
+                    className="text-sm font-medium text-slate-700 hover:text-[#2563EB] transition"
                   >
                     {item.name}
                   </button>
@@ -77,13 +113,13 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
               ) : (
                 <>
                   <button
-                    className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold bg-[#00BFB6] border border-[#00BFB6] text-white hover:bg-white hover:text-[#00BFB6] transition"
+                    className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold bg-[#2563EB] border border-[#2563EB] text-white hover:bg-white hover:text-[#2563EB] transition"
                     onClick={() => navigate('/admin-login')}
                   >
                     Login
                   </button>
                   <button
-                    className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold border border-[#00BFB6] text-[#00BFB6] hover:bg-[#00BFB6] hover:text-white transition"
+                    className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white transition"
                     onClick={() => navigate('/admin-register')}
                   >
                     Register
@@ -92,8 +128,11 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
               )}
             </div>
 
-            {/* Mobile Hamburger */}
-            <div className="md:hidden">
+            {/* Mobile: Avatar/Dropdown + Hamburger */}
+            <div className="md:hidden flex items-center gap-3">
+              {isAuthenticated && (
+                <UserDropdown showDashboardLink={true} />
+              )}
               <button
                 onClick={() => setIsMenuOpen((s) => !s)}
                 aria-label="Toggle navigation"
@@ -192,7 +231,7 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
                   <li key={item.name}>
                     <button
                       onClick={() => goAndClose(item.href)}
-                      className="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:text-[#00BFB6] hover:bg-gray-50 transition"
+                      className="block rounded-md px-3 py-3 text-base font-medium text-slate-700 hover:text-[#2563EB] hover:bg-gray-50 transition"
                     >
                       {item.name}
                     </button>
@@ -210,19 +249,19 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
                   </div>
                   <button
                     onClick={() => goAndClose('/admin-dashboard')}
-                    className="w-full rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:text-[#00BFB6] hover:bg-gray-50 transition text-left"
+                    className="w-full rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:text-[#2563EB] hover:bg-gray-50 transition text-left"
                   >
                     Dashboard
                   </button>
                   <button
                     onClick={() => goAndClose('/admin-profile')}
-                    className="w-full rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:text-[#00BFB6] hover:bg-gray-50 transition text-left"
+                    className="w-full rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:text-[#2563EB] hover:bg-gray-50 transition text-left"
                   >
                     Profile
                   </button>
                   <button
                     onClick={handleLogout}
-                    className="w-full rounded-full px-4 py-3 text-sm font-bold bg-white border border-[#00BFB6] text-[#00BFB6] hover:bg-[#00BFB6] hover:text-white transition mt-3"
+                    className="w-full rounded-full px-4 py-3 text-sm font-bold bg-white border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white transition mt-3"
                   >
                     Logout
                   </button>
@@ -231,13 +270,13 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
                 <>
                   <button
                     onClick={() => goAndClose('/admin-login')}
-                    className="w-full rounded-full px-4 py-3 text-sm font-bold bg-[#00BFB6] border border-[#00BFB6] text-white hover:text-white transition mt-3"
+                    className="w-full rounded-full px-4 py-3 text-sm font-bold bg-[#2563EB] border border-[#2563EB] text-white hover:text-white transition mt-3"
                   >
                     Login
                   </button>
                   <button
                     onClick={() => goAndClose('/admin-register')}
-                    className="w-full rounded-full px-4 py-3 text-sm font-bold border border-[#00BFB6] text-[#00BFB6] hover:bg-[#00BFB6] hover:text-white transition mt-3"
+                    className="w-full rounded-full px-4 py-3 text-sm font-bold border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white transition mt-3"
                   >
                     Register
                   </button>

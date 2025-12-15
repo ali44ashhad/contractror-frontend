@@ -340,7 +340,7 @@ const TeamForm = memo<TeamFormProps>(
               className={`flex-1 rounded-md border ${
                 errors.members
                   ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                  : 'border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6]'
+                  : 'border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB]'
               } p-2`}
             >
               <option value="">
@@ -360,7 +360,7 @@ const TeamForm = memo<TeamFormProps>(
               type="button"
               onClick={handleAddMember}
               disabled={!selectedMemberId || isLoadingMembers}
-              className="px-4 py-2 bg-[#00BFB6] text-white rounded-md hover:bg-[#00a8a0] transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-4 py-2 bg-[#2563EB] text-white rounded-md hover:bg-[#1D4ED8] transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
             >
               Add
             </button>
@@ -372,7 +372,7 @@ const TeamForm = memo<TeamFormProps>(
               {selectedMemberObjects.map((member) => (
                 <span
                   key={member._id}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium bg-[#00BFB6]/10 text-[#00BFB6] border border-[#00BFB6]/20"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium bg-[#2563EB]/10 text-[#2563EB] border border-[#2563EB]/20"
                 >
                   <span>
                     {member.name} ({formatRole(member.role)})
@@ -380,7 +380,7 @@ const TeamForm = memo<TeamFormProps>(
                   <button
                     type="button"
                     onClick={() => handleRemoveMember(member._id)}
-                    className="ml-1 hover:bg-[#00BFB6]/20 rounded-full p-0.5 transition duration-300"
+                    className="ml-1 hover:bg-[#2563EB]/20 rounded-full p-0.5 transition duration-300"
                     aria-label={`Remove ${member.name}`}
                   >
                     <svg
@@ -422,7 +422,7 @@ const TeamForm = memo<TeamFormProps>(
           <button
             type="submit"
             disabled={isLoading}
-            className="flex-1 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="flex-1 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Saving...' : isEditMode ? 'Update Team' : 'Create Team'}
           </button>

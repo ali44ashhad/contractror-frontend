@@ -53,7 +53,7 @@ const Login: React.FC = () => {
               value={form.email}
               onChange={handleChange}
               type="email"
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-[#00BFB6] focus:border-[#00BFB6]"
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:ring-[#2563EB] focus:border-[#2563EB]"
               required
             />
           </div>
@@ -65,14 +65,14 @@ const Login: React.FC = () => {
               value={form.password}
               onChange={handleChange}
               type={showPassword ? 'text' : 'password'}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 pr-10 focus:ring-[#00BFB6] focus:border-[#00BFB6]"
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 pr-10 focus:ring-[#2563EB] focus:border-[#2563EB]"
               required
             />
 
             <button
               type="button"
               onClick={togglePassword}
-              className="absolute right-3 top-[35px] text-gray-500 hover:text-[#00BFB6]"
+              className="absolute right-3 top-[35px] text-gray-500 hover:text-[#2563EB]"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full rounded-full px-4 py-3 bg-[#00BFB6] text-white font-bold mt-6 hover:bg-[#00a8a0] transition duration-150 disabled:opacity-60"
+            className="w-full rounded-full px-4 py-3 bg-[#2563EB] text-white font-bold mt-6 hover:bg-[#1D4ED8] transition duration-150 disabled:opacity-60"
             disabled={isLoading}
           >
             {isLoading ? 'Signing in...' : 'Login'}

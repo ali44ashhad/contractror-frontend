@@ -13,6 +13,7 @@ import UsersPage from './UsersPage';
 import ProjectsPage from './ProjectsPage';
 import TeamsPage from './TeamsPage';
 import RequestsPage from './RequestsPage';
+import ReportsPage from './ReportsPage';
 import UserDropdown from '../../components/UserDropdown';
 import Select from '../../components/Select';
 import Map from '../../components/Map';
@@ -108,7 +109,7 @@ const ExpandableUpdateCard: React.FC<{
               <div style={{ fontSize: '14px', fontWeight: '700', color: '#111827', marginBottom: '4px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {update.contractorName || 'Unknown Contractor'}
               </div>
-              <div style={{ fontSize: '12px', fontWeight: '500', color: '#00BFB6', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: '12px', fontWeight: '500', color: '#2563EB', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {update.projectName || 'Unknown Project'}
               </div>
             </div>
@@ -190,7 +191,7 @@ const ExpandableUpdateCard: React.FC<{
                   e.stopPropagation();
                   onSelect(update);
                 }}
-                className="text-xs px-4 py-2 border-2 border-gray-400 rounded-lg hover:bg-[#00BFB6]/10 hover:border-[#00BFB6] transition duration-300 font-semibold"
+                className="text-xs px-4 py-2 border-2 border-gray-400 rounded-lg hover:bg-[#2563EB]/10 hover:border-[#2563EB] transition duration-300 font-semibold"
                 style={{ color: '#374151' }}
               >
                 View Details
@@ -386,11 +387,11 @@ const AdminDashboard: React.FC = () => {
       case ProjectStatus.PLANNING:
         return 'bg-blue-100 text-blue-800';
       case ProjectStatus.IN_PROGRESS:
-        return 'bg-green-100 text-green-800';
+        return 'bg-gray-100 text-gray-800';
       case ProjectStatus.ON_HOLD:
         return 'bg-yellow-100 text-yellow-800';
       case ProjectStatus.COMPLETED:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-green-100 text-green-800';
       case ProjectStatus.CANCELLED:
         return 'bg-red-100 text-red-800';
       default:
@@ -412,7 +413,7 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center gap-4">
               {/* Hamburger (mobile) */}
               <button
-                className="md:hidden p-2 rounded-lg hover:bg-[#00BFB6]/10 transition duration-300"
+                className="md:hidden p-2 rounded-lg hover:bg-[#2563EB]/10 transition duration-300"
                 onClick={toggleSidebar}
                 aria-label="Toggle sidebar"
               >
@@ -433,7 +434,7 @@ const AdminDashboard: React.FC = () => {
 
               {/* Logo */}
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00BFB6] to-[#00a8a0] flex items-center justify-center text-white font-bold shadow-lg">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] flex items-center justify-center text-white font-bold shadow-lg">
                   CT
                 </div>
                 <div className="hidden sm:block font-bold text-gray-800 text-lg">
@@ -442,33 +443,17 @@ const AdminDashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Notifications / profile */}
+            {/* Profile */}
             <div className="flex-1 px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-4 justify-end">
+                {/* Desktop: UserDropdown */}
                 <div className="hidden sm:flex items-center gap-3">
-                  <button
-                    className="p-2 rounded-lg hover:bg-[#00BFB6]/10 transition duration-300"
-                    title="Notifications"
-                    aria-label="Notifications"
-                  >
-                    <svg
-                      className="w-6 h-6 text-gray-700"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                      />
-                    </svg>
-                  </button>
+                  <UserDropdown />
+                </div>
 
-                  <div className="pl-3 border-l border-gray-200">
-                    <UserDropdown />
-                  </div>
+                {/* Mobile: UserDropdown only */}
+                <div className="sm:hidden">
+                  <UserDropdown />
                 </div>
               </div>
             </div>
@@ -497,13 +482,13 @@ const AdminDashboard: React.FC = () => {
                   whileHover={{ x: 4 }}
                   className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 transition duration-300 ${
                     activeMenu === menu.key
-                      ? 'bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold shadow-lg'
-                      : 'text-gray-700 hover:bg-[#00BFB6]/10 hover:text-[#00BFB6]'
+                      ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold shadow-lg'
+                      : 'text-gray-700 hover:bg-[#2563EB]/10 hover:text-[#2563EB]'
                   }`}
                 >
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      activeMenu === menu.key ? 'bg-white' : 'bg-[#00BFB6]'
+                      activeMenu === menu.key ? 'bg-white' : 'bg-[#2563EB]'
                     }`}
                   />
                   <span>{menu.label}</span>
@@ -515,7 +500,7 @@ const AdminDashboard: React.FC = () => {
               <motion.button
                 onClick={logout}
                 whileHover={{ scale: 1.05 }}
-                className="w-full flex items-center justify-center p-3 rounded-lg bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white shadow-lg hover:shadow-xl transition duration-300"
+                className="w-full flex items-center justify-center p-3 rounded-lg bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white shadow-lg hover:shadow-xl transition duration-300"
               >
                 <LogOut size={20} className="mr-2" />
                 <span className="text-sm font-medium">Logout</span>
@@ -568,7 +553,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Total Projects
                     </div>
-                    <div className="text-3xl font-bold text-[#00BFB6]">
+                    <div className="text-3xl font-bold text-[#2563EB]">
                       {loadingKPIs ? (
                         <span className="text-gray-400">...</span>
                       ) : errorKPIs ? (
@@ -585,7 +570,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Updates Today
                     </div>
-                    <div className="text-3xl font-bold text-[#00BFB6]">
+                    <div className="text-3xl font-bold text-[#2563EB]">
                       {loadingKPIs ? (
                         <span className="text-gray-400">...</span>
                       ) : errorKPIs ? (
@@ -602,7 +587,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Active Contractors
                     </div>
-                    <div className="text-3xl font-bold text-[#00BFB6]">
+                    <div className="text-3xl font-bold text-[#2563EB]">
                       {loadingKPIs ? (
                         <span className="text-gray-400">...</span>
                       ) : errorKPIs ? (
@@ -619,7 +604,7 @@ const AdminDashboard: React.FC = () => {
                     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                       Pending Requests
                     </div>
-                    <div className="text-3xl font-bold text-[#00BFB6]">
+                    <div className="text-3xl font-bold text-[#2563EB]">
                       {loadingKPIs ? (
                         <span className="text-gray-400">...</span>
                       ) : errorKPIs ? (
@@ -781,7 +766,7 @@ const AdminDashboard: React.FC = () => {
                         <div className="font-bold text-gray-800 truncate mb-1">
                           {selectedItem.contractorName}
                         </div>
-                        <div className="text-xs text-[#00BFB6] font-medium truncate mb-2">
+                        <div className="text-xs text-[#2563EB] font-medium truncate mb-2">
                           {selectedItem.projectName}
                         </div>
                         <div className="text-sm text-gray-600 mt-2 line-clamp-2 mb-3">
@@ -796,7 +781,7 @@ const AdminDashboard: React.FC = () => {
                         <div className="mt-4 flex gap-2 flex-wrap">
                           <button
                             onClick={handleCloseDetail}
-                            className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-[#00BFB6]/10 hover:border-[#00BFB6] transition duration-300 font-medium"
+                            className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-[#2563EB]/10 hover:border-[#2563EB] transition duration-300 font-medium"
                           >
                             Close
                           </button>
@@ -820,24 +805,8 @@ const AdminDashboard: React.FC = () => {
             {/* Requests Management Page */}
             {activeMenu === 'requests' && <RequestsPage />}
 
-            {activeMenu === 'reports' && (
-              <motion.section
-                initial="hidden"
-                animate="show"
-                variants={staggerContainer}
-                className="space-y-6"
-              >
-                <motion.div
-                  variants={cardVariants}
-                  className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center"
-                >
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Reports & Exports
-                  </h3>
-                  <p className="text-gray-500">Coming soon</p>
-                </motion.div>
-              </motion.section>
-            )}
+            {/* Reports Page */}
+            {activeMenu === 'reports' && <ReportsPage />}
           </div>
         </main>
       </div>

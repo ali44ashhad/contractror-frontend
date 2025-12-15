@@ -218,7 +218,7 @@ const UserForm = memo<UserFormProps>(({ user, onSubmit, onCancel, isLoading = fa
             name="isActive"
             checked={formData.isActive}
             onChange={handleChange}
-            className="h-4 w-4 text-[#00BFB6] focus:ring-[#00BFB6] border-gray-300 rounded"
+            className="h-4 w-4 text-[#2563EB] focus:ring-[#2563EB] border-gray-300 rounded"
           />
           <label htmlFor="isActive" className="ml-2 block text-sm text-gray-700">
             Active
@@ -230,7 +230,7 @@ const UserForm = memo<UserFormProps>(({ user, onSubmit, onCancel, isLoading = fa
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isLoading ? 'Saving...' : isEditMode ? 'Update User' : 'Create User'}
         </button>

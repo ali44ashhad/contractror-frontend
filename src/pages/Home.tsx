@@ -9,7 +9,7 @@ import {
   featuresData,
 } from '../data/homeData';
 
-const ICON_COLOR = '#00BFB6';
+const ICON_COLOR = '#2563EB';
 
 // Animation variants
 const fadeUp = {
@@ -222,7 +222,7 @@ const Home: React.FC = () => {
                 whileInView="show"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="text-sm tracking-widest font-bold text-[#00BFB6] uppercase mb-3"
+                className="text-sm tracking-widest font-bold text-[#2563EB] uppercase mb-3"
               >
                 OUR SERVICES
               </motion.p>
@@ -284,7 +284,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* About Section - First Block */}
-      <section className="relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="about-us" className="relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto pt-5 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="relative flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] xl:aspect-[3/4] overflow-hidden rounded-3xl shadow-xl">
@@ -297,7 +297,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="lg:pl-12">
-            <p className="text-[#00BFA6] font-semibold text-sm tracking-widest uppercase mb-3">
+            <p className="text-[#2563EB] font-semibold text-sm tracking-widest uppercase mb-3">
               ABOUT US
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
@@ -319,7 +319,7 @@ const Home: React.FC = () => {
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center mb-4 last:mb-0">
                   <svg
-                    className="w-6 h-6 text-[#00BFA6] mr-3 flex-shrink-0"
+                    className="w-6 h-6 text-[#2563EB] mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -358,7 +358,7 @@ const Home: React.FC = () => {
               </Button>
 
               <div className="flex items-center">
-                <div className="p-3 rounded-full bg-[#00BFA6]/20 text-[#00BFA6] mr-3 flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#2563EB]/20 text-[#2563EB] mr-3 flex-shrink-0">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -388,7 +388,7 @@ const Home: React.FC = () => {
         {/* About Section - Second Block */}
         <div className="max-w-7xl mx-auto pt-5 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
           <div className="lg:pl-12">
-            <p className="text-[#00BFA6] font-semibold text-sm tracking-widest uppercase mb-3">
+            <p className="text-[#2563EB] font-semibold text-sm tracking-widest uppercase mb-3">
               ABOUT US
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
@@ -410,7 +410,7 @@ const Home: React.FC = () => {
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center mb-4 last:mb-0">
                   <svg
-                    className="w-6 h-6 text-[#00BFA6] mr-3 flex-shrink-0"
+                    className="w-6 h-6 text-[#2563EB] mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -449,7 +449,7 @@ const Home: React.FC = () => {
               </Button>
 
               <div className="flex items-center">
-                <div className="p-3 rounded-full bg-[#00BFA6]/20 text-[#00BFA6] mr-3 flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#2563EB]/20 text-[#2563EB] mr-3 flex-shrink-0">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -546,9 +546,9 @@ const Home: React.FC = () => {
                 whileInView="show"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="text-sm uppercase tracking-widest font-medium text-[#00BFB6] mb-2"
+                className="text-sm uppercase tracking-widest font-medium text-[#2563EB] mb-2"
               >
-                <span className="inline-block w-2 h-2 bg-[#00BFB6] rounded-full mr-2" />
+                <span className="inline-block w-2 h-2 bg-[#2563EB] rounded-full mr-2" />
                 WHY CHOOSE US?
               </motion.p>
               <motion.h1
@@ -600,7 +600,7 @@ const Home: React.FC = () => {
                         {item.description}
                       </p>
                       <div>
-                        <div className="text-4xl md:text-5xl font-bold text-[#00BFB6] mb-1">
+                          <div className="text-4xl md:text-5xl font-bold text-[#2563EB] mb-1">
                           {item.metric}
                         </div>
                         <p className="text-gray-500">{item.metricLabel}</p>
@@ -650,7 +650,7 @@ const Home: React.FC = () => {
                           {item.description}
                         </p>
                         <div>
-                          <div className="text-4xl md:text-5xl font-bold text-[#00BFB6] mb-1">
+                          <div className="text-4xl md:text-5xl font-bold text-[#2563EB] mb-1">
                             {item.metric}
                           </div>
                           <p className="text-gray-500">{item.metricLabel}</p>

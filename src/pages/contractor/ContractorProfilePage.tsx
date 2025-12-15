@@ -13,10 +13,10 @@ import Button from '../../components/Button';
 import UserDropdown from '../../components/UserDropdown';
 
 /**
- * ProfilePage component
- * Admin profile page with edit profile and change password functionality
+ * ContractorProfilePage component
+ * Contractor profile page with edit profile and change password functionality
  */
-const ProfilePage: React.FC = () => {
+const ContractorProfilePage: React.FC = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<'profile' | 'password'>('profile');
@@ -218,7 +218,7 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               <button
-                onClick={() => navigate('/admin-dashboard')}
+                onClick={() => navigate('/contractor-dashboard')}
                 className="p-2 rounded-lg hover:bg-[#2563EB]/10 transition duration-300"
                 aria-label="Back to dashboard"
               >
@@ -385,7 +385,7 @@ const ProfilePage: React.FC = () => {
                     </Button>
                     <button
                       type="button"
-                      onClick={() => navigate('/admin-dashboard')}
+                      onClick={() => navigate('/contractor-dashboard')}
                       className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition duration-300"
                     >
                       Cancel
@@ -475,5 +475,5 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export default ProfilePage;
+export default ContractorProfilePage;
 

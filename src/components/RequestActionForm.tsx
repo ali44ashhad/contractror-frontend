@@ -200,7 +200,7 @@ const RequestActionForm = memo<RequestActionFormProps>(
             className={`mt-1 block w-full rounded-md border ${
               errors.adminNotes
                 ? 'border-red-300 focus:ring-red-500 focus:border-red-500'
-                : 'border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6]'
+                : 'border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB]'
             } p-2`}
           />
           {errors.adminNotes && (
@@ -217,7 +217,7 @@ const RequestActionForm = memo<RequestActionFormProps>(
             disabled={isLoading}
             className={`flex-1 font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed ${
               action === 'approve'
-                ? 'bg-gradient-to-r from-green-500 to-green-600 text-white'
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
                 : 'bg-gradient-to-r from-red-500 to-red-600 text-white'
             }`}
           >

@@ -11,6 +11,7 @@ import Table from '../../components/Table';
 import Select from '../../components/Select';
 import Input from '../../components/Input';
 import { getMapUrl } from '../../utils/maps';
+import { getProjectStatusColor } from '../../utils/badgeColors';
 
 /**
  * MemberProjectsPage component
@@ -93,24 +94,6 @@ const MemberProjectsPage: React.FC = () => {
     return new Date(dateString).toLocaleDateString();
   }, []);
 
-  // Get status badge color
-  const getStatusColor = useCallback((status: ProjectStatus): string => {
-    switch (status) {
-      case ProjectStatus.PLANNING:
-        return 'bg-blue-100 text-blue-800';
-      case ProjectStatus.IN_PROGRESS:
-        return 'bg-green-100 text-green-800';
-      case ProjectStatus.ON_HOLD:
-        return 'bg-yellow-100 text-yellow-800';
-      case ProjectStatus.COMPLETED:
-        return 'bg-gray-100 text-gray-800';
-      case ProjectStatus.CANCELLED:
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  }, []);
-
   // Table columns
   const columns = [
     {
@@ -125,7 +108,7 @@ const MemberProjectsPage: React.FC = () => {
       header: 'Status',
       render: (project: Project) => (
         <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(
+          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getProjectStatusColor(
             project.status
           )}`}
         >
@@ -168,7 +151,7 @@ const MemberProjectsPage: React.FC = () => {
                 href={getMapUrl(project.location)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#00BFB6] hover:text-[#00a8a0] hover:underline transition duration-300 flex items-center gap-1.5 group"
+                className="text-[#2563EB] hover:text-[#1D4ED8] hover:underline transition duration-300 flex items-center gap-1.5 group"
               >
                 <svg
                   className="w-4 h-4"
@@ -189,7 +172,7 @@ const MemberProjectsPage: React.FC = () => {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <span className="text-gray-800 group-hover:text-[#00BFB6]">
+                <span className="text-gray-800 group-hover:text-[#2563EB]">
                   {project.location}
                 </span>
               </a>

@@ -95,7 +95,7 @@ const Map: React.FC<MapProps> = ({ location, height = '100%' }) => {
       >
         <div className="text-center">
           <svg
-            className="animate-spin w-12 h-12 mx-auto mb-4 text-[#00BFB6]"
+            className="animate-spin w-12 h-12 mx-auto mb-4 text-[#2563EB]"
             fill="none"
             viewBox="0 0 24 24"
           >

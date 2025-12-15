@@ -42,11 +42,14 @@ const WorkLogForm = memo<WorkLogFormProps>(
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
-    // Get today's date normalized to start of day (matching backend behavior)
+    // Get today's date normalized to start of day in UTC (matching backend behavior)
     const getTodayDate = useCallback(() => {
       const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return today.toISOString().split('T')[0];
+      // Use UTC methods to avoid timezone shifts
+      const year = today.getUTCFullYear();
+      const month = String(today.getUTCMonth() + 1).padStart(2, '0');
+      const day = String(today.getUTCDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }, []);
 
     // Automatically determine update type based on current time
@@ -509,7 +512,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
             onChange={handleChange}
             rows={4}
             placeholder="Describe the work done..."
-            className="mt-1 block w-full rounded-md border border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6] p-2"
+            className="mt-1 block w-full rounded-md border border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB] p-2"
           />
         </div>
 
@@ -523,7 +526,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
             <button
               type="button"
               onClick={startCamera}
-              className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-[#00BFB6] transition duration-300 text-gray-600 hover:text-[#00BFB6]"
+              className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-[#2563EB] transition duration-300 text-gray-600 hover:text-[#2563EB]"
             >
               <div className="text-center">
                 <svg
@@ -593,7 +596,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
                     type="button"
                     onClick={capturePhoto}
                     disabled={files.length >= 10 || isLoadingCamera || isGettingLocation}
-                    className="flex-1 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-base"
+                    className="flex-1 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-base"
                   >
                     {isGettingLocation ? (
                       <>
@@ -763,7 +766,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
                         }
                         rows={2}
                         placeholder="Describe this document..."
-                        className="w-full rounded-md border border-gray-300 focus:ring-[#00BFB6] focus:border-[#00BFB6] p-2 text-sm"
+                        className="w-full rounded-md border border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB] p-2 text-sm"
                       />
                     </div>
                   </div>
@@ -777,7 +780,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
           <button
             type="submit"
             disabled={isLoading}
-            className="flex-1 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="flex-1 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-semibold px-6 py-3 rounded-lg hover:shadow-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Submitting...' : 'Submit Work Log'}
           </button>

@@ -10,6 +10,7 @@ import {
 import { User, CreateUserRequest, UpdateUserRequest } from '../../types/auth.types';
 import { UserRole } from '../../types/common.types';
 import { formatRole } from '../../utils/formatRole';
+import { getRoleColor, getUserStatusColor } from '../../utils/badgeColors';
 import Table from '../../components/Table';
 import Modal from '../../components/Modal';
 import UserForm from '../../components/UserForm';
@@ -189,7 +190,7 @@ const UsersPage: React.FC = () => {
       key: 'role',
       header: 'Role',
       render: (user: User) => (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#00BFB6]/10 text-[#00BFB6]">
+        <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getRoleColor(user.role)}`}>
           {formatRole(user.role)}
         </span>
       ),
@@ -199,11 +200,7 @@ const UsersPage: React.FC = () => {
       header: 'Status',
       render: (user: User) => (
         <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-            user.isActive
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
-          }`}
+          className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getUserStatusColor(user.isActive)}`}
         >
           {user.isActive ? 'Active' : 'Inactive'}
         </span>
@@ -268,7 +265,7 @@ const UsersPage: React.FC = () => {
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => handleEditClick(user)}
-            className="p-2 rounded-lg bg-[#00BFB6]/10 text-[#00BFB6] hover:bg-[#00BFB6]/20 transition duration-300"
+            className="p-2 rounded-lg bg-[#2563EB]/10 text-[#2563EB] hover:bg-[#2563EB]/20 transition duration-300"
             aria-label="Edit user"
           >
             <svg
@@ -423,7 +420,7 @@ const UsersPage: React.FC = () => {
           </button>
           <button
             onClick={() => setIsCreateModalOpen(true)}
-            className="px-4 py-2 bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white font-medium rounded-lg hover:shadow-lg transition duration-300 flex items-center gap-2 text-sm"
+            className="px-4 py-2 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white font-medium rounded-lg hover:shadow-lg transition duration-300 flex items-center gap-2 text-sm"
           >
             <svg
               className="w-4 h-4"

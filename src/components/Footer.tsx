@@ -37,7 +37,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                 <Building2
                   size={48}
                   className="flex-shrink-0"
-                  style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
                 />
                 <h1 className="text-4xl font-extrabold ml-3 tracking-wider">
                   <span className="font-light">Con</span>tractor
@@ -54,7 +54,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
             <article>
               <h2
                 className="text-xl font-semibold mb-6 uppercase tracking-wider"
-                style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
               >
                 Company
               </h2>
@@ -68,13 +68,13 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                       <ChevronRight
                         size={18}
                         className="mr-2 mt-0.5"
-                        style={{ color: '#00BFB6' }}
+                        style={{ color: '#2563EB' }}
                       />
                       <span className="relative pb-0.5">
                         {link.name}
                         <span
                           className="absolute bottom-0 left-0 w-0 transition-all duration-300 ease-in-out group-hover:w-full"
-                          style={{ backgroundColor: '#00BFB6' }}
+                          style={{ backgroundColor: '#2563EB' }}
                         />
                       </span>
                     </Link>
@@ -87,7 +87,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
             <article>
               <h2
                 className="text-xl font-semibold mb-6 uppercase tracking-wider"
-                style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
               >
                 Legal
               </h2>
@@ -101,13 +101,13 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                       <ChevronRight
                         size={18}
                         className="mr-2 mt-0.5"
-                        style={{ color: '#00BFB6' }}
+                        style={{ color: '#2563EB' }}
                       />
                       <span className="relative pb-0.5">
                         {item.label}
                         <span
                           className="absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 ease-in-out group-hover:w-full"
-                          style={{ backgroundColor: '#00BFB6' }}
+                          style={{ backgroundColor: '#2563EB' }}
                         />
                       </span>
                     </Link>
@@ -120,7 +120,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
             <article>
               <h2
                 className="text-xl font-semibold mb-6 uppercase tracking-wider"
-                style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
               >
                 Contact Us
               </h2>
@@ -128,7 +128,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                 <Phone
                   size={24}
                   className="flex-shrink-0 mt-1"
-                  style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
                 />
                 <a
                   href="tel:+18091206705"
@@ -141,7 +141,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                 <Mail
                   size={24}
                   className="flex-shrink-0 mt-1"
-                  style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
                 />
                 <a
                   href="mailto:info@domain.com"
@@ -154,7 +154,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                 <MapPin
                   size={24}
                   className="flex-shrink-0 mt-1"
-                  style={{ color: '#00BFB6' }}
+                  style={{ color: '#2563EB' }}
                 />
                 <p className="ml-3 text-gray-300">
                   37 San Juan Lane, Graaf Florisstraat 22A, 3021 CH
@@ -181,7 +181,7 @@ const Footer = memo<FooterProps>(({ className = '' }) => {
                     style={{
                       backgroundColor: '#0D1C2E',
                       boxShadow: '0 0 10px 0 #0D1C2E',
-                      borderColor: '#00BFB6',
+                      borderColor: '#2563EB',
                     }}
                     aria-label={social}
                   >

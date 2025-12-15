@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
+import { UserRole } from '../types/common.types';
 
 interface UserDropdownProps {
   showDashboardLink?: boolean;
@@ -16,6 +17,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ showDashboardLink = false }
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, logout } = useAuth();
 
   // Close dropdown when clicking outside
@@ -54,19 +56,44 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ showDashboardLink = false }
 
   const handleProfileClick = useCallback(() => {
     setIsOpen(false);
-    navigate('/admin-profile');
-  }, [navigate]);
+    if (!user) return;
+    
+    // Navigate to profile page based on user role
+    if (user.role === UserRole.ADMIN) {
+      navigate('/admin-profile');
+    } else if (user.role === UserRole.CONTRACTOR) {
+      navigate('/contractor-profile');
+    } else {
+      // All other roles (member, developer, accounts, etc.)
+      navigate('/member-profile');
+    }
+  }, [navigate, user]);
 
   const handleDashboardClick = useCallback(() => {
     setIsOpen(false);
-    navigate('/admin-dashboard');
-  }, [navigate]);
+    if (!user) return;
+    
+    // Navigate to dashboard based on user role
+    if (user.role === UserRole.ADMIN) {
+      navigate('/admin-dashboard');
+    } else if (user.role === UserRole.CONTRACTOR) {
+      navigate('/contractor-dashboard');
+    } else {
+      // All other roles (member, developer, accounts, etc.)
+      navigate('/member-dashboard');
+    }
+  }, [navigate, user]);
 
   if (!user) {
     return null;
   }
 
   const userInitial = user.name.charAt(0).toUpperCase();
+
+  // Check if we're on a profile page
+  const isOnProfilePage = location.pathname === '/admin-profile' || 
+                         location.pathname === '/contractor-profile' || 
+                         location.pathname === '/member-profile';
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -77,7 +104,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ showDashboardLink = false }
         aria-label="User menu"
         aria-expanded={isOpen}
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00BFB6] to-[#00a8a0] flex items-center justify-center text-white font-semibold text-sm ring-2 ring-[#00BFB6]/20">
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] flex items-center justify-center text-white font-semibold text-sm ring-2 ring-[#2563EB]/20">
           {userInitial}
         </div>
         <span className="hidden sm:block text-sm font-medium text-gray-800">
@@ -118,7 +145,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ showDashboardLink = false }
             {showDashboardLink && (
               <button
                 onClick={handleDashboardClick}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#00BFB6]/10 hover:text-[#00BFB6] transition duration-300 flex items-center gap-2"
+                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#2563EB]/10 hover:text-[#2563EB] transition duration-300 flex items-center gap-2"
               >
                 <svg
                   className="w-4 h-4"
@@ -139,7 +166,12 @@ const UserDropdown: React.FC<UserDropdownProps> = ({ showDashboardLink = false }
 
             <button
               onClick={handleProfileClick}
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#00BFB6]/10 hover:text-[#00BFB6] transition duration-300 flex items-center gap-2"
+              disabled={isOnProfilePage}
+              className={`w-full text-left px-4 py-2 text-sm transition duration-300 flex items-center gap-2 ${
+                isOnProfilePage
+                  ? 'text-gray-400 cursor-not-allowed opacity-60'
+                  : 'text-gray-700 hover:bg-[#2563EB]/10 hover:text-[#2563EB]'
+              }`}
             >
               <svg
                 className="w-4 h-4"

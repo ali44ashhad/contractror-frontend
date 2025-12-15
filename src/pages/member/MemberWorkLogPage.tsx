@@ -133,7 +133,7 @@ const MemberWorkLogPage: React.FC = () => {
             onClick={() => setActiveTab('log')}
             className={`flex-1 px-6 py-4 font-semibold transition duration-300 ${
               activeTab === 'log'
-                ? 'bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white'
+                ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
@@ -143,7 +143,7 @@ const MemberWorkLogPage: React.FC = () => {
             onClick={() => setActiveTab('history')}
             className={`flex-1 px-6 py-4 font-semibold transition duration-300 ${
               activeTab === 'history'
-                ? 'bg-gradient-to-r from-[#00BFB6] to-[#00a8a0] text-white'
+                ? 'bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
@@ -216,7 +216,7 @@ const MemberWorkLogPage: React.FC = () => {
           </div>
           {isLoadingProjects ? (
             <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#00BFB6]" />
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#2563EB]" />
             </div>
           ) : projects.length === 0 ? (
             <div className="text-center py-12">
@@ -243,7 +243,7 @@ const MemberWorkLogPage: React.FC = () => {
             <button
               onClick={() => fetchUpdates()}
               disabled={isLoadingUpdates}
-              className="px-4 py-2 bg-[#00BFB6] text-white rounded-lg hover:bg-[#00a8a0] transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-4 py-2 bg-[#2563EB] text-white rounded-lg hover:bg-[#1D4ED8] transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <svg
                 className={`w-4 h-4 ${isLoadingUpdates ? 'animate-spin' : ''}`}

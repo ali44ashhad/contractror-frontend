@@ -10,7 +10,9 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ProfilePage from './pages/admin/ProfilePage';
 import ContractorDashboard from './pages/contractor/ContractorDashboard';
+import ContractorProfilePage from './pages/contractor/ContractorProfilePage';
 import MemberDashboard from './pages/member/MemberDashboard';
+import MemberProfilePage from './pages/member/MemberProfilePage';
 import { useAuth } from './hooks/useAuth';
 import { UserRole } from './types/common.types';
 
@@ -34,7 +36,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#00BFB6]" />
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#2563EB]" />
       </div>
     );
   }
@@ -91,7 +93,7 @@ const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#00BFB6]" />
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#2563EB]" />
       </div>
     );
   }
@@ -123,6 +125,7 @@ const App: React.FC = () => {
     '/contractor-dashboard',
     '/contractor-profile',
     '/member-dashboard',
+    '/member-profile',
     '/supervisor-admin',
   ];
 
@@ -138,8 +141,8 @@ const App: React.FC = () => {
   if (loading) {
     return (
       <div>
-        <div className="flex items-center justify-center h-screen bg-gradient-to-br from-[#d3f5f3] to-[#b3e5fc]">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#00BFB6]"></div>
+        <div className="flex items-center justify-center h-screen bg-gradient-to-br from-[#EFF6FF] to-[#DBEAFE]">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#2563EB]"></div>
         </div>
       </div>
     );
@@ -151,6 +154,7 @@ const App: React.FC = () => {
     '/contractor-dashboard',
     '/contractor-profile',
     '/member-dashboard',
+    '/member-profile',
     '/supervisor-admin',
   ];
 
@@ -212,10 +216,26 @@ const App: React.FC = () => {
           }
         />
         <Route
+          path="/contractor-profile"
+          element={
+            <ProtectedRoute requiredRole={UserRole.CONTRACTOR}>
+              <ContractorProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/member-dashboard"
           element={
             <ProtectedRoute excludedRoles={[UserRole.ADMIN, UserRole.CONTRACTOR]}>
               <MemberDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/member-profile"
+          element={
+            <ProtectedRoute excludedRoles={[UserRole.ADMIN, UserRole.CONTRACTOR]}>
+              <MemberProfilePage />
             </ProtectedRoute>
           }
         />
