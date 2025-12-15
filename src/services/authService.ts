@@ -10,6 +10,7 @@ import { User } from '../types/auth.types';
 
 /**
  * Register a new user
+ * Sets httpOnly cookie automatically via withCredentials
  */
 export const register = async (
   data: RegisterRequest

@@ -14,8 +14,7 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 /**
- * Request interceptor - can be used to add auth tokens if needed
- * Removes Content-Type header for FormData to let browser set it with boundary
+ * Request interceptor - removes Content-Type header for FormData to let browser set it with boundary
  */
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
