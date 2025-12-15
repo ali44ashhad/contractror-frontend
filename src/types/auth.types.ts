@@ -41,6 +41,7 @@ export interface AuthResponse {
   success: boolean;
   data: {
     user: User;
+    token?: string; // Optional token for Safari/iOS fallback when cookies are blocked
   };
   message: string;
 }

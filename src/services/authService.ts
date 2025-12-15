@@ -2,6 +2,7 @@ import apiClient from './apiClient';
 import { LoginRequest, RegisterRequest, AuthResponse } from '../types/auth.types';
 import { ApiResponse } from '../types/api.types';
 import { User } from '../types/auth.types';
+import { isIOSSafari, storeTokenForIOS, clearTokenForIOS } from '../utils/iosDetection';
 
 /**
  * Authentication service
@@ -11,29 +12,49 @@ import { User } from '../types/auth.types';
 /**
  * Register a new user
  * Sets httpOnly cookie automatically via withCredentials
+ * For iOS Safari, also stores token from response body
  */
 export const register = async (
   data: RegisterRequest
 ): Promise<AuthResponse> => {
   const response = await apiClient.post<AuthResponse>('/auth/register', data);
+  
+  // iOS Safari Fix: Store token if returned in response
+  if (isIOSSafari() && response.data.data?.token) {
+    storeTokenForIOS(response.data.data.token);
+  }
+  
   return response.data;
 };
 
 /**
  * Login user
  * Sets httpOnly cookie automatically via withCredentials
+ * For iOS Safari, also stores token from response body
  */
 export const login = async (data: LoginRequest): Promise<AuthResponse> => {
   const response = await apiClient.post<AuthResponse>('/auth/login', data);
+  
+  // iOS Safari Fix: Store token if returned in response
+  if (isIOSSafari() && response.data.data?.token) {
+    storeTokenForIOS(response.data.data.token);
+  }
+  
   return response.data;
 };
 
 /**
  * Logout user
  * Clears httpOnly cookie
+ * For iOS Safari, also clears stored token
  */
 export const logout = async (): Promise<void> => {
   await apiClient.post('/auth/logout');
+  
+  // iOS Safari Fix: Clear stored token
+  if (isIOSSafari()) {
+    clearTokenForIOS();
+  }
 };
 
 /**
