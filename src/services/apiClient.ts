@@ -36,6 +36,8 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    const statusCode = error.response?.status || 500;
+    
     const apiError: ApiError = {
       success: false,
       error: {
@@ -43,7 +45,7 @@ apiClient.interceptors.response.use(
           error.response?.data?.error?.message ||
           error.message ||
           'An unexpected error occurred',
-        statusCode: error.response?.status || 500,
+        statusCode,
       },
     };
     return Promise.reject(apiError);

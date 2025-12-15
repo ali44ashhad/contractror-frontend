@@ -36,15 +36,24 @@ export const useAuth = (): UseAuthReturn => {
       try {
         const response = await authService.getMe();
         // getMe returns data: user directly, not data: { user }
+        // If response.success is false, user is not authenticated (expected on login page)
         if (response.success && response.data) {
           // Check if response.data is the user object or has a user property
           const userData = (response.data as any).user || response.data;
           if (userData && userData._id) {
             setUser(userData);
           }
+        } else {
+          // User not authenticated - this is expected on login page
+          setUser(null);
         }
       } catch (err) {
-        // User not authenticated or token expired
+        // Handle any unexpected errors
+        const apiError = err as ApiError;
+        if (apiError.error.statusCode !== 401) {
+          // Only log non-401 errors (unexpected errors)
+          console.error('Auth check failed:', apiError.error.message);
+        }
         setUser(null);
       } finally {
         setIsLoading(false);

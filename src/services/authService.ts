@@ -38,10 +38,30 @@ export const logout = async (): Promise<void> => {
 /**
  * Get current authenticated user
  * Note: Backend returns data: user directly, not data: { user }
+ * This is used to check auth status, so 401 errors are expected when not authenticated
+ * Using validateStatus to prevent axios from treating 401 as an error (which causes console noise)
  */
 export const getMe = async (): Promise<ApiResponse<User>> => {
-  const response = await apiClient.get<ApiResponse<User>>('/auth/me');
-  return response.data;
+  try {
+    const response = await apiClient.get<ApiResponse<User>>('/auth/me', {
+      // Don't treat 401 as an error - it's expected when checking auth status
+      // This prevents axios from logging the error to console
+      validateStatus: (status) => status < 500, // Accept all status codes except 5xx
+    });
+    
+    // If status is 401, the response.data will contain the error from the server
+    // The server returns: { success: false, error: { message: "...", statusCode: 401 } }
+    if (response.status === 401) {
+      return response.data as ApiResponse<User>;
+    }
+    
+    // For successful responses (200), return the data
+    return response.data;
+  } catch (error) {
+    // Handle any unexpected errors (5xx, network errors, etc.)
+    // This should rarely happen since we're accepting status < 500
+    throw error;
+  }
 };
 
 /**
