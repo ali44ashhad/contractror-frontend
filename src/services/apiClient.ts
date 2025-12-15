@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { ApiError, ApiResponse } from '../types/api.types';
+import { ApiError } from '../types/api.types';
 
 /**
  * Axios instance configured for API calls

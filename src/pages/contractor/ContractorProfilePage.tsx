@@ -18,7 +18,7 @@ import UserDropdown from '../../components/UserDropdown';
  */
 const ContractorProfilePage: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'profile' | 'password'>('profile');
 
   // Profile form state

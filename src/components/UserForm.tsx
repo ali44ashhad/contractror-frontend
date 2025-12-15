@@ -127,7 +127,6 @@ const UserForm = memo<UserFormProps>(({ user, onSubmit, onCancel, isLoading = fa
       if (isEditMode) {
         const updateData: UpdateUserRequest = {
           name: formData.name,
-          email: formData.email,
           phone: formData.phone || undefined,
           role: formData.role,
           isActive: formData.isActive,

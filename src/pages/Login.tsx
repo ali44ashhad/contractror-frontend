@@ -8,7 +8,7 @@ import { LoginRequest } from '../types/auth.types';
  * Redirects are handled by useAuth hook based on user role
  */
 const Login: React.FC = () => {
-  const { login, error, clearError, isLoading } = useAuth();
+  const { login, error, isLoading } = useAuth();
   const [form, setForm] = useState<LoginRequest>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState<boolean>(false);
 

@@ -1,5 +1,4 @@
 import { Update } from './update.types';
-import { Project } from './project.types';
 import { Team } from './team.types';
 import { UserReference } from './project.types';
 

@@ -161,8 +161,8 @@ function Table<T>({
                             <td
                               colSpan={
                                 columns.length +
-                                (renderExpandableContent ? 1 : 0) +
-                                (renderActions ? 1 : 0)
+                                (renderExpandableContent !== undefined ? 1 : 0) +
+                                (renderActions !== undefined ? 1 : 0)
                               }
                               className="px-6 py-4 bg-gray-50"
                             >
@@ -264,5 +264,5 @@ function Table<T>({
   );
 }
 
-export default memo(Table) as <T>(props: TableProps<T>) => JSX.Element;
+export default memo(Table) as <T>(props: TableProps<T>) => React.JSX.Element;
 

@@ -14,8 +14,8 @@ import {
   CreateTeamRequest,
   UpdateTeamRequest,
   ProjectReference,
-  UserReference,
 } from '../../types/team.types';
+import { UserReference } from '../../types/project.types';
 import { Project } from '../../types/project.types';
 import { User } from '../../types/auth.types';
 import { UserRole } from '../../types/common.types';
@@ -179,13 +179,6 @@ const TeamsPage: React.FC = () => {
     []
   );
 
-  // Helper function to get member names
-  const getMemberNames = useCallback((members: (string | UserReference)[]): string => {
-    if (!members || members.length === 0) return 'No members';
-    return members
-      .map((member) => (typeof member === 'string' ? 'Loading...' : member.name))
-      .join(', ');
-  }, []);
 
   // Handle create team
   const handleCreateTeam = useCallback(
@@ -303,7 +296,7 @@ const TeamsPage: React.FC = () => {
             <div className="text-gray-800">
               {team.members && team.members.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
-                  {team.members.map((member, index) => {
+                  {team.members.map((member) => {
                     const memberName = typeof member === 'string' ? 'Loading...' : member.name;
                     const memberRole = typeof member === 'string' ? '' : formatRole(member.role);
                     const memberRoleValue = typeof member === 'string' ? '' : member.role;

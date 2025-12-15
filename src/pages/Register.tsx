@@ -42,7 +42,7 @@ const Register: React.FC = () => {
     useState<ValidationErrors>({});
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const [autoRedirectTimer, setAutoRedirectTimer] =
-    useState<NodeJS.Timeout | null>(null);
+    useState<ReturnType<typeof setTimeout> | null>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
@@ -112,18 +112,17 @@ const Register: React.FC = () => {
       try {
         clearError();
 
-        const result = await register(form);
+        await register(form);
 
-        if (result) {
-          // Show success popup/modal
-          setShowSuccess(true);
-          // Auto-redirect to /admin-login after 1.5s
-          const timer = setTimeout(() => {
-            setShowSuccess(false);
-            navigate('/admin-login', { replace: true });
-          }, 1500);
-          setAutoRedirectTimer(timer);
-        }
+        // If we reach here, registration was successful
+        // Show success popup/modal
+        setShowSuccess(true);
+        // Auto-redirect to /admin-login after 1.5s
+        const timer = setTimeout(() => {
+          setShowSuccess(false);
+          navigate('/admin-login', { replace: true });
+        }, 1500);
+        setAutoRedirectTimer(timer);
       } catch (err) {
         // Error handled by useAuth hook
       }

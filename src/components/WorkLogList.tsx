@@ -1,5 +1,5 @@
-import React, { memo, useState, useCallback, useMemo } from 'react';
-import { Update, UpdateType, DocumentType } from '../types/update.types';
+import { memo, useState, useCallback, useMemo } from 'react';
+import { Update, UpdateType } from '../types/update.types';
 import { Project } from '../types/project.types';
 import { PaginationMeta } from '../types/api.types';
 import Input from './Input';
@@ -20,7 +20,7 @@ interface WorkLogListProps {
  * Displays list of work log updates with filters and image gallery
  */
 const WorkLogList = memo<WorkLogListProps>(
-  ({ updates, projects, isLoading = false, onRefresh, pagination, onPageChange }) => {
+  ({ updates, projects, isLoading = false, pagination, onPageChange }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [projectFilter, setProjectFilter] = useState<string>('');
     const [updateTypeFilter, setUpdateTypeFilter] = useState<string>('');

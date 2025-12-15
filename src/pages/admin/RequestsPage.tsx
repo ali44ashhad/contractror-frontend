@@ -260,8 +260,6 @@ const RequestsPage: React.FC = () => {
     (request: ProjectRequest) => {
       const projectRef =
         typeof request.projectId === 'object' ? request.projectId : null;
-      const requestedByRef =
-        typeof request.requestedBy === 'object' ? request.requestedBy : null;
       const reviewedByRef =
         typeof request.reviewedBy === 'object' ? request.reviewedBy : null;
 

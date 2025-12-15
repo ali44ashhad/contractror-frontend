@@ -8,7 +8,6 @@ import { RecentUpdate, DashboardKPI } from '../../types/admin.types';
 import { getDashboardStats, getRecentUpdates } from '../../services/dashboardService';
 import { getAllProjects } from '../../services/projectService';
 import { Project, ProjectStatus } from '../../types/project.types';
-import { getMapUrl } from '../../utils/maps';
 import UsersPage from './UsersPage';
 import ProjectsPage from './ProjectsPage';
 import TeamsPage from './TeamsPage';
@@ -28,22 +27,6 @@ const fadeUp = {
   }),
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  show: (custom = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.55, delay: 0.04 * custom },
-  }),
-};
-
-const heroVariants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: 'easeOut' },
-  },
-};
 
 const staggerContainer = {
   hidden: {},
@@ -56,7 +39,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.5, ease: 'easeOut' },
+    transition: { duration: 0.5, ease: 'easeOut' as const },
   },
 };
 
@@ -67,7 +50,7 @@ const ExpandableUpdateCard: React.FC<{
   update: RecentUpdate;
   index: number;
   onSelect: (update: RecentUpdate) => void;
-}> = ({ update, index, onSelect }) => {
+}> = ({ update, onSelect }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -210,7 +193,7 @@ const ExpandableUpdateCard: React.FC<{
  * Adapted for construction management system
  */
 const AdminDashboard: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<RecentUpdate | null>(null);

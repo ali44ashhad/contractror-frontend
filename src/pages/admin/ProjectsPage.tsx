@@ -83,13 +83,21 @@ const ProjectsPage: React.FC = () => {
     execute: fetchProjects,
   } = useApi(fetchProjectsFn);
 
+  // Create project wrapper
+  const createProjectWrapper = useCallback(
+    async (...args: unknown[]) => {
+      return createProject(args[0] as CreateProjectRequest);
+    },
+    []
+  );
+
   // Create project
   const {
     isLoading: isCreating,
     execute: executeCreate,
     error: createError,
     clearError: clearCreateError,
-  } = useApi(createProject);
+  } = useApi(createProjectWrapper);
 
   // Update project wrapper
   const updateProjectWrapper = useCallback(

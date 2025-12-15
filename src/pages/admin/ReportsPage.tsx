@@ -3,7 +3,7 @@ import { useApi } from '../../hooks/useApi';
 import { getAllProjects } from '../../services/projectService';
 import { getProjectReport } from '../../services/reportService';
 import { Project, ProjectStatus } from '../../types/project.types';
-import { ProjectReport, MemberUpdate } from '../../types/report.types';
+import { ProjectReport, MemberUpdate, GetProjectReportResponse } from '../../types/report.types';
 import { Update, UserReference } from '../../types/update.types';
 import Select from '../../components/Select';
 import Input from '../../components/Input';
@@ -148,12 +148,11 @@ const ReportsPage: React.FC = () => {
   }, [reportType, startDate, endDate]);
 
   // Fetch report function
-  const fetchReportFn = useCallback(() => {
+  const fetchReportFn = useCallback(async (): Promise<GetProjectReportResponse> => {
     if (!selectedProjectId || !dateRange.startDate || !dateRange.endDate) {
-      return Promise.resolve({
-        success: false,
-        data: null,
-      });
+      // Return a valid response structure even when missing params
+      // This should not happen in practice as button is disabled
+      throw new Error('Project ID and date range are required');
     }
     return getProjectReport(selectedProjectId, dateRange.startDate, dateRange.endDate);
   }, [selectedProjectId, dateRange]);
@@ -430,7 +429,7 @@ const ReportsPage: React.FC = () => {
       ) : reportError ? (
         <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center">
           <p className="text-red-500">
-            {reportError?.error?.message || 'Failed to load report'}
+            {reportError || 'Failed to load report'}
           </p>
         </div>
       ) : !report ? (
