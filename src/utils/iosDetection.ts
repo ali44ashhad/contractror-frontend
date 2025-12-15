@@ -4,22 +4,35 @@
  */
 
 /**
- * Check if the current browser is iOS Safari or Chrome on iOS
- * iOS Safari has issues with cross-site cookies, so we need to use Authorization header fallback
+ * Check if the current browser is iOS Safari or any iOS browser
+ * All iOS browsers (Safari, Chrome, Firefox, Edge) have issues with cross-site cookies,
+ * so we need to use Authorization header fallback
  */
 export const isIOSSafari = (): boolean => {
   if (typeof window === 'undefined') return false;
   
   const userAgent = window.navigator.userAgent;
   
-  // Detect iOS Safari or Chrome on iOS (both use WebKit)
-  // iOS Safari: contains "iPhone" or "iPad" and "Safari" but not "Chrome"
-  // iOS Chrome: contains "iPhone" or "iPad" and "CriOS" (Chrome on iOS)
+  // Detect iOS device (iPhone, iPad, iPod)
   const isIOS = /iPhone|iPad|iPod/.test(userAgent);
-  const isSafari = /Safari/.test(userAgent) && !/Chrome|CriOS|FxiOS/.test(userAgent);
+  
+  if (!isIOS) return false;
+  
+  // iOS Safari: contains "Safari" but NOT "Chrome", "CriOS", "FxiOS", or "Edg"
+  const isSafari = /Safari/.test(userAgent) && !/Chrome|CriOS|FxiOS|Edg|OPR/.test(userAgent);
+  
+  // iOS Chrome: contains "CriOS" (Chrome on iOS)
   const isIOSChrome = /CriOS/.test(userAgent);
   
-  return isIOS && (isSafari || isIOSChrome);
+  // iOS Firefox: contains "FxiOS" (Firefox on iOS)
+  const isIOSFirefox = /FxiOS/.test(userAgent);
+  
+  // iOS Edge: contains "EdgiOS" (Edge on iOS)
+  const isIOSEdge = /EdgiOS/.test(userAgent);
+  
+  // All iOS browsers have issues with cross-origin cookies
+  // Return true for any iOS browser
+  return isSafari || isIOSChrome || isIOSFirefox || isIOSEdge;
 };
 
 /**

@@ -47,9 +47,12 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     // iOS Safari Fix: Store token from response if present
-    // Backend returns token in response.data.data.token (for login/register) or response.data.data.token (for refresh)
+    // Backend returns token in response.data.data.token (for login/register/refresh)
+    // Check multiple possible locations for the token
     if (isIOSSafari()) {
-      const token = response.data?.data?.token || response.data?.token;
+      const token = response.data?.data?.token || 
+                    response.data?.token || 
+                    (response.data?.data && typeof response.data.data === 'object' && 'token' in response.data.data ? response.data.data.token : null);
       if (token) {
         storeTokenForIOS(token);
       }
