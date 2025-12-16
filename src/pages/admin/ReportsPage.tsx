@@ -8,6 +8,7 @@ import { Update, UserReference } from '../../types/update.types';
 import Select from '../../components/Select';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { exportReportToPDF } from '../../utils/pdfExport';
 
 type ReportType = 'daily' | 'weekly';
 
@@ -34,6 +35,7 @@ const ReportsPage: React.FC = () => {
     return `${year}-${month}-${day}`;
   });
   const [projects, setProjects] = useState<Project[]>([]);
+  const [isExporting, setIsExporting] = useState<boolean>(false);
 
   // Fetch projects on mount (excluding planning status)
   useEffect(() => {
@@ -164,6 +166,8 @@ const ReportsPage: React.FC = () => {
     execute: fetchReport,
   } = useApi(fetchReportFn);
 
+  const report: ProjectReport | null = reportResponse?.success ? reportResponse.data : null;
+
   // Handle generate report button click
   const handleGenerateReport = useCallback(() => {
     if (!selectedProjectId) {
@@ -175,7 +179,27 @@ const ReportsPage: React.FC = () => {
     fetchReport();
   }, [selectedProjectId, dateRange, fetchReport]);
 
-  const report: ProjectReport | null = reportResponse?.success ? reportResponse.data : null;
+  // Handle export report button click
+  const handleExportReport = useCallback(async () => {
+    if (!report) {
+      return;
+    }
+
+    setIsExporting(true);
+    try {
+      await exportReportToPDF(
+        report,
+        reportType,
+        dateRange.startDate!,
+        dateRange.endDate!
+      );
+    } catch (error) {
+      console.error('Failed to export report:', error);
+      alert('Failed to export report. Please try again.');
+    } finally {
+      setIsExporting(false);
+    }
+  }, [report, reportType, dateRange]);
 
   // Get member name helper
   const getMemberName = (member: string | UserReference): string => {
@@ -440,16 +464,30 @@ const ReportsPage: React.FC = () => {
         <div className="space-y-6">
           {/* Project Info */}
           <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">{report.project.name}</h3>
-            <p className="text-gray-600 text-sm">{report.project.description}</p>
-            <div className="mt-4 flex gap-4 text-sm">
-              <span className="text-gray-500">
-                Teams: <span className="font-semibold text-gray-800">{report.teams.length}</span>
-              </span>
-              <span className="text-gray-500">
-                Members:{' '}
-                <span className="font-semibold text-gray-800">{report.members.length}                </span>
-              </span>
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+              <div className="flex-1 mb-4 md:mb-0">
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{report.project.name}</h3>
+                <p className="text-gray-600 text-sm">{report.project.description}</p>
+                <div className="mt-4 flex gap-4 text-sm">
+                  <span className="text-gray-500">
+                    Teams: <span className="font-semibold text-gray-800">{report.teams.length}</span>
+                  </span>
+                  <span className="text-gray-500">
+                    Members:{' '}
+                    <span className="font-semibold text-gray-800">{report.members.length}</span>
+                  </span>
+                </div>
+              </div>
+              <div className="w-full md:w-auto md:ml-4">
+                <Button
+                  onClick={handleExportReport}
+                  isLoading={isExporting}
+                  disabled={isExporting}
+                  className="w-full md:w-auto"
+                >
+                  Export Report
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -505,7 +543,7 @@ const ReportsPage: React.FC = () => {
                                   <UpdateDisplay update={memberUpdate.morning} />
                                 ) : (
                                   <p className="text-gray-400 italic text-sm">
-                                    No morning update recorded
+                                    No update posted
                                   </p>
                                 )}
                               </div>
@@ -521,7 +559,7 @@ const ReportsPage: React.FC = () => {
                                   <UpdateDisplay update={memberUpdate.evening} />
                                 ) : (
                                   <p className="text-gray-400 italic text-sm">
-                                    No evening update recorded
+                                    No update posted
                                   </p>
                                 )}
                               </div>
