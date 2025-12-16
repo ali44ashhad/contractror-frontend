@@ -271,7 +271,7 @@ export const exportReportToPDF = async (
       yPosition += 2;
 
       if (memberUpdate.morning) {
-        yPosition = await addUpdateToPDF(doc, memberUpdate.morning, margin, yPosition, contentWidth, pageHeight, margin, checkNewPage, addText, addImageToPDF);
+        yPosition = await addUpdateToPDF(doc, memberUpdate.morning, margin, yPosition, contentWidth, checkNewPage, addImageToPDF);
       } else {
         checkNewPage(lineHeight);
         doc.setFontSize(9);
@@ -294,7 +294,7 @@ export const exportReportToPDF = async (
       yPosition += 2;
 
       if (memberUpdate.evening) {
-        yPosition = await addUpdateToPDF(doc, memberUpdate.evening, margin, yPosition, contentWidth, pageHeight, margin, checkNewPage, addText, addImageToPDF);
+        yPosition = await addUpdateToPDF(doc, memberUpdate.evening, margin, yPosition, contentWidth, checkNewPage, addImageToPDF);
       } else {
         checkNewPage(lineHeight);
         doc.setFontSize(9);
@@ -342,10 +342,7 @@ const addUpdateToPDF = async (
   margin: number,
   startY: number,
   contentWidth: number,
-  pageHeight: number,
-  pageMargin: number,
   checkNewPage: (space?: number) => void,
-  addText: (text: string, fontSize: number, isBold?: boolean, color?: string) => void,
   addImageToPDF: (doc: jsPDF, imageData: string, x: number, y: number, maxWidth: number, maxHeight: number) => Promise<number>
 ): Promise<number> => {
   let yPos = startY;
