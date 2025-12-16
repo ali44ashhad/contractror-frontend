@@ -1,7 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Button from '../components/Button';
 import images from '../data/images';
+import { useAuth } from '../hooks/useAuth';
+import { UserRole } from '../types/common.types';
 import {
   serviceData,
   services,
@@ -58,10 +61,29 @@ const cardVariants = {
  * Replicates contractor Home.jsx with TypeScript
  */
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
   const altImages = useMemo(
     () => [images.homeFeature1, images.homeFeature2],
     []
   );
+
+  const handleGetStarted = useCallback(() => {
+    if (isAuthenticated && user) {
+      // Navigate to respective dashboard based on user role
+      if (user.role === UserRole.ADMIN) {
+        navigate('/admin-dashboard');
+      } else if (user.role === UserRole.CONTRACTOR) {
+        navigate('/contractor-dashboard');
+      } else {
+        // For MEMBER, DEVELOPER, ACCOUNTS, etc.
+        navigate('/member-dashboard');
+      }
+    } else {
+      // Not authenticated, go to login
+      navigate('/login');
+    }
+  }, [isAuthenticated, user, navigate]);
 
   return (
     <>
@@ -115,7 +137,7 @@ const Home: React.FC = () => {
               variants={heroVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Button variant="primary">
+              <Button variant="primary" onClick={handleGetStarted}>
                 Get Started
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +155,7 @@ const Home: React.FC = () => {
                 </svg>
               </Button>
 
-              <Button variant="secondary">
+              <Button variant="secondary" onClick={handleGetStarted}>
                 View Projects
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

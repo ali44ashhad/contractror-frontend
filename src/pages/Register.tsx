@@ -25,7 +25,6 @@ interface ValidationErrors {
 
 /**
  * Register page component
- * Matches contractor AdminRegisterForm.jsx exactly
  */
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -117,10 +116,10 @@ const Register: React.FC = () => {
         // If we reach here, registration was successful
         // Show success popup/modal
         setShowSuccess(true);
-        // Auto-redirect to /admin-login after 1.5s
+        // Auto-redirect to /login after 1.5s
         const timer = setTimeout(() => {
           setShowSuccess(false);
-          navigate('/admin-login', { replace: true });
+          navigate('/login', { replace: true });
         }, 1500);
         setAutoRedirectTimer(timer);
       } catch (err) {
@@ -156,7 +155,7 @@ const Register: React.FC = () => {
     if (autoRedirectTimer) {
       clearTimeout(autoRedirectTimer);
     }
-    navigate('/admin-login', { replace: true });
+    navigate('/login', { replace: true });
   }, [autoRedirectTimer, navigate]);
 
   return (
@@ -249,7 +248,6 @@ const Register: React.FC = () => {
                 className="mt-1 block w-full rounded-md border border-gray-300 p-2 py-2.5 bg-white focus:ring-[#2563EB] focus:border-[#2563EB]"
               >
                 <option value={UserRole.DEVELOPER}>{formatRole(UserRole.DEVELOPER)}</option>
-                <option value={UserRole.ADMIN}>{formatRole(UserRole.ADMIN)}</option>
                 <option value={UserRole.CONTRACTOR}>{formatRole(UserRole.CONTRACTOR)}</option>
                 <option value={UserRole.MEMBER}>{formatRole(UserRole.MEMBER)}</option>
                 <option value={UserRole.ACCOUNTS}>{formatRole(UserRole.ACCOUNTS)}</option>

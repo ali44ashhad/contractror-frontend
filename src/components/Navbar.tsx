@@ -114,13 +114,13 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
                 <>
                   <button
                     className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold bg-[#2563EB] border border-[#2563EB] text-white hover:bg-white hover:text-[#2563EB] transition"
-                    onClick={() => navigate('/admin-login')}
+                    onClick={() => navigate('/login')}
                   >
                     Login
                   </button>
                   <button
                     className="rounded-full px-4 py-2 text-sm hover:cursor-pointer font-bold border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white transition"
-                    onClick={() => navigate('/admin-register')}
+                    onClick={() => navigate('/register')}
                   >
                     Register
                   </button>
@@ -269,13 +269,13 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
               ) : (
                 <>
                   <button
-                    onClick={() => goAndClose('/admin-login')}
+                    onClick={() => goAndClose('/login')}
                     className="w-full rounded-full px-4 py-3 text-sm font-bold bg-[#2563EB] border border-[#2563EB] text-white hover:text-white transition mt-3"
                   >
                     Login
                   </button>
                   <button
-                    onClick={() => goAndClose('/admin-register')}
+                    onClick={() => goAndClose('/register')}
                     className="w-full rounded-full px-4 py-3 text-sm font-bold border border-[#2563EB] text-[#2563EB] hover:bg-[#2563EB] hover:text-white transition mt-3"
                   >
                     Register

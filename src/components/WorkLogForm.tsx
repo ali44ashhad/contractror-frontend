@@ -154,7 +154,6 @@ const WorkLogForm = memo<WorkLogFormProps>(
             try {
               await video.play();
               setIsLoadingCamera(false);
-              console.log('Video started playing');
             } catch (err) {
               console.error('Error playing video:', err);
               setIsLoadingCamera(false);
@@ -175,7 +174,6 @@ const WorkLogForm = memo<WorkLogFormProps>(
           video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true });
           video.addEventListener('canplay', handleCanPlay, { once: true });
           video.addEventListener('playing', () => {
-            console.log('Video is now playing');
             setIsLoadingCamera(false);
           }, { once: true });
           
@@ -183,7 +181,6 @@ const WorkLogForm = memo<WorkLogFormProps>(
           try {
             await video.play();
             setIsLoadingCamera(false);
-            console.log('Video play() succeeded immediately');
           } catch (err) {
             // If play fails, wait for metadata
             console.log('Video play() failed, waiting for metadata...', err);
@@ -384,7 +381,6 @@ const WorkLogForm = memo<WorkLogFormProps>(
           try {
             if (video.paused || video.readyState < 2) {
               await video.play();
-              console.log('Video playing successfully');
             }
           } catch (error) {
             console.error('Error playing video:', error);
@@ -410,9 +406,9 @@ const WorkLogForm = memo<WorkLogFormProps>(
         
         video.addEventListener('canplay', handleCanPlay, { once: true });
         video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true });
-        video.addEventListener('playing', () => {
-          console.log('Video is playing');
-        }, { once: true });
+        // video.addEventListener('playing', () => {
+        //   console.log('Video is playing');
+        // }, { once: true });
         
         return () => {
           video.removeEventListener('canplay', handleCanPlay);

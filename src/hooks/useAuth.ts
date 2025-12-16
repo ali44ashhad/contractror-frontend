@@ -124,11 +124,11 @@ export const useAuth = (): UseAuthReturn => {
     try {
       await authService.logout();
       setUser(null);
-      navigate('/admin-login', { replace: true });
+      navigate('/login', { replace: true });
     } catch (err) {
       // Even if logout fails, clear local state
       setUser(null);
-      navigate('/admin-login', { replace: true });
+      navigate('/login', { replace: true });
     }
   }, [navigate]);
 

@@ -42,7 +42,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin-login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // Check if user role is excluded
@@ -176,7 +176,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="/admin-login"
+          path="/login"
           element={
             <PublicRoute>
               <Login />
@@ -184,7 +184,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="/admin-register"
+          path="/register"
           element={
             <PublicRoute>
               <Register />
