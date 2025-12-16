@@ -289,6 +289,19 @@ const Register: React.FC = () => {
               {isLoading ? 'Creating...' : 'Register'}
             </button>
           </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{' '}
+              <button
+                type="button"
+                onClick={() => navigate('/login')}
+                className="text-[#2563EB] font-semibold hover:text-[#1D4ED8] hover:underline transition"
+              >
+                Login
+              </button>
+            </p>
+          </div>
         </div>
       </div>
 

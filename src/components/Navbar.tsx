@@ -48,16 +48,32 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
     }
   }, [location.pathname, navigate]);
 
+  const handleHomeClick = useCallback(() => {
+    setIsMenuOpen(false);
+    if (location.pathname === '/') {
+      // If already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // If on another page, navigate to home and then scroll to top
+      navigate('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location.pathname, navigate]);
+
   const handleNavClick = useCallback(
     (item: { name: string; href: string }) => {
       if (item.name === 'About Us') {
         handleAboutUsClick();
+      } else if (item.name === 'Home') {
+        handleHomeClick();
       } else {
         setIsMenuOpen(false);
         navigate(item.href);
       }
     },
-    [navigate, handleAboutUsClick]
+    [navigate, handleAboutUsClick, handleHomeClick]
   );
 
   const goAndClose = useCallback(
@@ -65,11 +81,13 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
       setIsMenuOpen(false);
       if (href === '#about-us') {
         handleAboutUsClick();
+      } else if (href === '/') {
+        handleHomeClick();
       } else {
         navigate(href);
       }
     },
-    [navigate, handleAboutUsClick]
+    [navigate, handleAboutUsClick, handleHomeClick]
   );
 
   return (
@@ -81,7 +99,7 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button
-            onClick={() => navigate('/')}
+            onClick={handleHomeClick}
             className="flex items-center gap-3"
             aria-label="Go to home"
           >
@@ -196,7 +214,7 @@ const Navbar = memo<NavbarProps>(({ className = '' }) => {
           <div className="h-full flex flex-col p-4">
             <div className="flex items-center justify-between mb-4">
               <button
-                onClick={() => goAndClose('/')}
+                onClick={handleHomeClick}
                 className="flex items-center gap-3"
               >
                 <span className="text-xl font-bold text-gray-900">

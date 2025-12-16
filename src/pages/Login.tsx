@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { LoginRequest } from '../types/auth.types';
@@ -8,6 +9,7 @@ import { LoginRequest } from '../types/auth.types';
  * Redirects are handled by useAuth hook based on user role
  */
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const { login, error, isLoading } = useAuth();
   const [form, setForm] = useState<LoginRequest>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -93,6 +95,19 @@ const Login: React.FC = () => {
             {isLoading ? 'Signing in...' : 'Login'}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{' '}
+            <button
+              type="button"
+              onClick={() => navigate('/register')}
+              className="text-[#2563EB] font-semibold hover:text-[#1D4ED8] hover:underline transition"
+            >
+              Register
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
