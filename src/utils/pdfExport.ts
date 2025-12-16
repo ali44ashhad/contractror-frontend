@@ -409,11 +409,18 @@ const addUpdateToPDF = async (
       if (docItem.latitude !== undefined && docItem.longitude !== undefined) {
         yPos += 4;
         doc.setFontSize(7);
-        doc.text(
-          `📍 Lat: ${docItem.latitude.toFixed(6)}, Lng: ${docItem.longitude.toFixed(6)}`,
-          margin + 5,
-          yPos
-        );
+        const locationText = `Location: Lat: ${docItem.latitude.toFixed(6)}, Lng: ${docItem.longitude.toFixed(6)}`;
+        const locationUrl = `https://www.google.com/maps?q=${docItem.latitude},${docItem.longitude}`;
+        
+        // Calculate text width to create clickable area
+        const textWidth = doc.getTextWidth(locationText);
+        const textHeight = 7; // Approximate height for font size 7
+        
+        // Add the text
+        doc.text(locationText, margin + 5, yPos);
+        
+        // Add clickable link
+        doc.link(margin + 5, yPos - textHeight, textWidth, textHeight, { url: locationUrl });
       }
       yPos += 4;
 
