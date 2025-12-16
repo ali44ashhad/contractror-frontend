@@ -593,7 +593,7 @@ const ContractorProjectsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition duration-300 ${
                       hasPendingRequest
                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
-                        : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                        : 'bg-green-100 text-green-700 hover:bg-green-200'
                     }`}
                     aria-label="Request completion"
                     title={
@@ -623,7 +623,7 @@ const ContractorProjectsPage: React.FC = () => {
                     className={`px-4 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition duration-300 ${
                       hasPendingRequest
                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60'
-                        : 'bg-[#2563EB]/10 text-[#2563EB] hover:bg-[#2563EB]/20'
+                        : 'bg-orange-100 text-orange-700 hover:bg-orange-200'
                     }`}
                     aria-label="Request extension"
                     title={

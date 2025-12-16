@@ -696,7 +696,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
             {files.map((fileWithMeta, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg p-4 bg-gray-50"
+                className="border border-gray-200 rounded-lg p-4 bg-gray-50 overflow-x-hidden"
               >
                 <div className="flex items-start gap-4">
                   {fileWithMeta.preview ? (
@@ -722,7 +722,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
                       </svg>
                     </div>
                   )}
-                  <div className="flex-1 space-y-2">
+                  <div className="flex-1 space-y-2 min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-gray-800 truncate">
                         {fileWithMeta.file.name}
@@ -766,7 +766,7 @@ const WorkLogForm = memo<WorkLogFormProps>(
                         }
                         rows={2}
                         placeholder="Describe this document..."
-                        className="w-full rounded-md border border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB] p-2 text-sm"
+                        className="w-full min-w-0 rounded-md border border-gray-300 focus:ring-[#2563EB] focus:border-[#2563EB] p-2 text-sm"
                       />
                     </div>
                   </div>
